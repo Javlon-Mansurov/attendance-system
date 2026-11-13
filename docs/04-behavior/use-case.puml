@@ -1,0 +1,43 @@
+﻿@startuml
+left to right direction
+skinparam packageStyle rectangle
+title attendance_db: Диаграмма вариантов использования (Use Case)
+
+actor "Сотрудник\n(employee)" as Emp
+actor "Менеджер\n(manager)" as Mgr
+actor "Бухгалтер\n(accountant)" as Acc
+actor "Администратор\n(admin)" as Adm
+
+rectangle "Система учёта рабочего времени (attendance_db)" {
+  usecase "Отметить приход / уход\n(time_logs)" as UC1
+  usecase "Просмотреть свой график работы" as UC2
+  usecase "Подать заявку на отпуск" as UC3
+  usecase "Проверить корректность дат\nи пересечения" as UC4
+  usecase "Утвердить / отклонить отпуск" as UC5
+  usecase "Зарегистрировать отсутствие\n(больничный, командировка)" as UC6
+  usecase "Настроить график работы\nсотрудника" as UC7
+  usecase "Вести карточки сотрудников" as UC8
+  usecase "Сформировать сводный табель" as UC9
+  usecase "Экспортировать табель в CSV" as UC10
+  usecase "Вести отделы и праздники" as UC11
+  usecase "Управлять пользователями (users)" as UC12
+}
+
+Emp --> UC1
+Emp --> UC2
+Emp --> UC3
+
+Mgr --> UC5
+Mgr --> UC6
+Mgr --> UC7
+Mgr --> UC8
+Mgr --> UC9
+
+Acc --> UC9
+
+Adm --> UC11
+Adm --> UC12
+
+UC3 ..> UC4 : <<include>>
+UC10 ..> UC9 : <<extend>>
+@enduml

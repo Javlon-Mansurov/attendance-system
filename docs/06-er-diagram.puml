@@ -1,0 +1,94 @@
+﻿@startuml
+skinparam linetype ortho
+title attendance_db: ER-диаграмма логической модели
+
+entity departments {
+  * id : INT(11) <<PK>>
+  --
+  * department_name : VARCHAR(100) <<UQ>>
+  description : TEXT
+  * created_at : TIMESTAMP
+}
+
+entity employees {
+  * id : INT(11) <<PK>>
+  --
+  * full_name : VARCHAR(150)
+  phone : VARCHAR(20)
+  email : VARCHAR(100) <<UQ>>
+  * department_id : INT(11) <<FK>>
+  position : VARCHAR(100)
+  hire_date : DATE
+  * status : ENUM
+}
+
+entity users {
+  * id : INT(11) <<PK>>
+  --
+  employee_id : INT(11) <<FK, UQ>>
+  * username : VARCHAR(50) <<UQ>>
+  * password : VARCHAR(255)
+  * role : ENUM
+  * created_at : TIMESTAMP
+}
+
+entity work_schedules {
+  * id : INT(11) <<PK>>
+  --
+  * employee_id : INT(11) <<FK>>
+  * day_of_week : TINYINT(4)
+  * start_time : TIME
+  * end_time : TIME
+  * break_minutes : INT(11)
+  * is_working : TINYINT(1)
+}
+
+entity time_logs {
+  * id : INT(11) <<PK>>
+  --
+  * employee_id : INT(11) <<FK>>
+  * work_date : DATE
+  check_in : DATETIME
+  check_out : DATETIME
+  * created_at : TIMESTAMP
+}
+
+entity absences {
+  * id : INT(11) <<PK>>
+  --
+  * employee_id : INT(11) <<FK>>
+  * absence_type : ENUM
+  * start_date : DATE
+  * end_date : DATE
+  reason : TEXT
+  * status : ENUM
+}
+
+entity leave_requests {
+  * id : INT(11) <<PK>>
+  --
+  * employee_id : INT(11) <<FK>>
+  * start_date : DATE
+  * end_date : DATE
+  reason : TEXT
+  * status : ENUM
+  approved_by : INT(11) <<FK>>
+  * created_at : TIMESTAMP
+}
+
+entity holidays {
+  * id : INT(11) <<PK>>
+  --
+  * holiday_name : VARCHAR(150)
+  * holiday_date : DATE <<UQ>>
+  description : TEXT
+}
+
+departments ||--o{ employees : "department_id"
+employees ||--o| users : "employee_id"
+employees ||--o{ work_schedules : "employee_id"
+employees ||--o{ time_logs : "employee_id"
+employees ||--o{ absences : "employee_id"
+employees ||--o{ leave_requests : "employee_id"
+users o|--o{ leave_requests : "approved_by"
+@enduml

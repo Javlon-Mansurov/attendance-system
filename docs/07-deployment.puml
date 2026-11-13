@@ -1,0 +1,20 @@
+﻿@startuml
+title attendance_db: Диаграмма развёртывания
+
+node "Компьютер пользователя" as pc {
+  artifact "Браузер\n(Chrome / Firefox / Edge)" as browser
+}
+
+node "XAMPP Server (Localhost / VDS)" as server {
+  node "Apache HTTP Server" as apache {
+  }
+  node "PHP 8.2 Runtime" as php {
+    artifact "public/index.php\n(Front Controller)" as app
+  }
+  database "MariaDB / MySQL 8\n(attendance_db, utf8mb4)" as db
+}
+
+browser --> apache : HTTP / HTTPS (Порт 80 / 443)
+apache --> php : обработка PHP-скриптов
+php --> db : PDO MySQL (127.0.0.1:3306)
+@enduml

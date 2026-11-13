@@ -1,0 +1,35 @@
+﻿@startuml
+title Бизнес-процесс: Оформление и согласование отпуска (attendance_db)
+
+|Сотрудник|
+start
+repeat
+  :Заполнить форму заявки на отпуск\n(start_date, end_date, reason);
+  |Система|
+  :Проверить end_date >= start_date\nи отсутствие пересечений;
+repeat while (Данные корректны?) is (нет) not (да)
+
+:Сохранить заявку в leave_requests\n(status = pending);
+
+|Менеджер|
+:Открыть список заявок отдела;
+:Проверить график работы (work_schedules);
+if (Утвердить отпуск?) then (да)
+  |Система|
+  :Обновить статус: status = approved;\nЗаписать approved_by = manager_id;
+  fork
+    |Система|
+    :Отобразить отпуск в табеле бухгалтера;
+  fork again
+    |Сотрудник|
+    :Увидеть статус «Утверждено» в кабинете;
+  end fork
+else (нет)
+  |Система|
+  :Обновить статус: status = rejected;\nЗаписать approved_by = manager_id;
+  |Сотрудник|
+  :Увидеть статус «Отклонено»;
+endif
+
+stop
+@enduml

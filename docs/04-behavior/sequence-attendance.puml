@@ -1,0 +1,35 @@
+﻿@startuml
+title Диаграмма последовательности: Утверждение заявки на отпуск менеджером
+autonumber
+
+actor "Менеджер\n(manager)" as Mgr
+participant "Браузер" as B
+participant "index.php\n+ Router" as R
+participant "LeaveController" as C
+participant "LeaveRequestRepository" as Repo
+database "MySQL\nattendance_db" as DB
+
+Mgr -> B: Нажимает «Утвердить» на заявке #7
+B -> R: POST /leaves/7/approve (csrf_token)
+R -> C: approve(7)
+activate C
+
+C -> C: Проверить роль manager и CSRF-токен
+C -> Repo: findById(7)
+Repo -> DB: SELECT * FROM leave_requests WHERE id = ?
+DB --> Repo: строка заявки
+Repo --> C: заявка (status = pending)
+
+alt статус равен pending
+  C -> Repo: updateStatus(7, 'approved', managerUserId)
+  Repo -> DB: UPDATE leave_requests\nSET status = 'approved', approved_by = ?\nWHERE id = ? AND status = 'pending'
+  DB --> Repo: 1 строка обновлена
+  Repo --> C: true
+  C --> B: 302 Location: /leaves (сообщение «Заявка утверждена»)
+else заявка уже обработана или нет прав
+  C --> B: 403 Forbidden / Ошибка состояния
+end
+
+deactivate C
+B --> Mgr: Обновлённый список заявок на отпуск
+@enduml

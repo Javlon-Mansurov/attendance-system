@@ -1,0 +1,108 @@
+﻿@startuml
+skinparam classAttributeIconSize 0
+title attendance_db: Диаграмма классов предметной области
+
+enum UserRole {
+  admin
+  employee
+  manager
+  accountant
+}
+
+enum EmployeeStatus {
+  active
+  inactive
+}
+
+enum AbsenceType {
+  leave
+  sick
+  business_trip
+}
+
+enum RequestStatus {
+  pending
+  approved
+  rejected
+}
+
+class Department {
+  - id: int
+  - departmentName: string
+  - description: string [0..1]
+  - createdAt: datetime
+}
+
+class Employee {
+  - id: int
+  - fullName: string
+  - phone: string [0..1]
+  - email: string [0..1]
+  - position: string [0..1]
+  - hireDate: date [0..1]
+  - status: EmployeeStatus
+}
+
+class User {
+  - id: int
+  - username: string
+  - password: string
+  - role: UserRole
+  - createdAt: datetime
+  + verifyPassword(plain: string): bool
+}
+
+class WorkSchedule {
+  - id: int
+  - dayOfWeek: int
+  - startTime: time
+  - endTime: time
+  - breakMinutes: int
+  - isWorking: bool
+  + plannedHours(): float
+}
+
+class TimeLog {
+  - id: int
+  - workDate: date
+  - checkIn: datetime [0..1]
+  - checkOut: datetime [0..1]
+  - createdAt: datetime
+  + workedHours(): float
+}
+
+class Absence {
+  - id: int
+  - absenceType: AbsenceType
+  - startDate: date
+  - endDate: date
+  - reason: string [0..1]
+  - status: RequestStatus
+}
+
+class LeaveRequest {
+  - id: int
+  - startDate: date
+  - endDate: date
+  - reason: string [0..1]
+  - status: RequestStatus
+  - createdAt: datetime
+  + approve(approver: User): void
+  + reject(approver: User): void
+}
+
+class Holiday {
+  - id: int
+  - holidayName: string
+  - holidayDate: date
+  - description: string [0..1]
+}
+
+Department "1" -- "0..*" Employee : включает >
+Employee "1" -- "0..1" User : учётная запись >
+Employee "1" *-- "0..7" WorkSchedule : график смен >
+Employee "1" *-- "0..*" TimeLog : отметки времени >
+Employee "1" *-- "0..*" Absence : отсутствия >
+Employee "1" *-- "0..*" LeaveRequest : подаёт >
+User "0..1" -- "0..*" LeaveRequest : утверждает (approved_by) >
+@enduml

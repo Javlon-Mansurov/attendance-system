@@ -1,0 +1,33 @@
+﻿@startuml
+skinparam componentStyle uml2
+title attendance_db: Диаграмма компонентов (MVC и трёхзвенная архитектура)
+
+node "Браузер пользователя" {
+  [HTML5 / CSS3 (Bootstrap 5.3)] as UI
+  [app.js (таймер смены и фильтры)] as JS
+}
+
+package "Сервер приложения attendance_db (PHP 8.2)" {
+  [public/index.php\nFront Controller] as FC
+  [Core\n(Router, Database, View,\nSession, Csrf, Auth, Validator)] as Core
+  [Controllers\n(Auth, TimeLog, Leave, Schedule, Report)] as Ctrl
+  [Repositories\n(User, Employee, Department,\nTimeLog, Leave, Absence, Holiday)] as Repo
+  [views/ (HTML-шаблоны)] as Views
+}
+
+database "MySQL / MariaDB\n(attendance_db, utf8mb4)" as DB
+
+interface "HTTP / HTTPS" as HTTP
+
+UI ..> HTTP
+JS ..> HTTP
+HTTP -- FC
+
+FC --> Core
+FC --> Ctrl
+Ctrl --> Core
+Ctrl --> Repo
+Ctrl --> Views
+Repo --> Core : PDO
+Core --> DB : SQL (Prepared Statements)
+@enduml
