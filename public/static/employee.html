@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Рахимов Ф. Д. — Учёт рабочего времени</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap&subset=cyrillic" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="../assets/css/app.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark app-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="layout.html">Учёт времени · Кадры</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+            aria-controls="mainNav" aria-expanded="false" aria-label="Открыть меню">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="layout.html">Главная</a></li>
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="employees.html">Сотрудники</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Табель</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Отпуска</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Отчёт</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2 text-white">
+        <span>hr</span>
+        <span class="badge role-badge">Отдел кадров</span>
+        <button type="button" class="btn btn-sm btn-outline-light">Выйти</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="container py-4">
+  <nav aria-label="Навигационная цепочка">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="employees.html">Сотрудники</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Рахимов Фарход Джамшедович</li>
+    </ol>
+  </nav>
+
+  <div class="row g-4">
+    <aside class="col-12 col-lg-3">
+      <div class="card"><div class="card-body text-center">
+        <span class="avatar avatar-lg mx-auto mb-3" role="img" aria-label="Фото отсутствует">РФ</span>
+        <h1 class="h3">Рахимов Фарход Джамшедович</h1>
+        <span class="badge status status-present">Пришёл</span>
+      </div></div>
+    </aside>
+
+    <section class="col-12 col-lg-9" aria-label="Данные сотрудника">
+      <div class="card mb-4">
+        <div class="card-header"><h2 class="h6 mb-0">Служебные данные</h2></div>
+        <div class="card-body">
+          <dl class="details">
+            <dt>Табельный номер</dt><dd>00147</dd>
+            <dt>Отдел</dt><dd>Кафедра программирования</dd>
+            <dt>Должность</dt><dd>Старший преподаватель</dd>
+            <dt>График работы</dt><dd>Пн–Пт, 09:00–17:00</dd>
+            <dt>Дата приёма</dt><dd>01.09.2014</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header"><h2 class="h6 mb-0">Личные данные</h2></div>
+        <div class="card-body">
+          <dl class="details">
+            <dt>Дата рождения</dt><dd>14.03.1985</dd>
+            <dt>Пол</dt><dd>Мужской</dd>
+            <dt>Телефон</dt><dd><a href="tel:+992900000147">+992 90 000 01 47</a></dd>
+            <dt>E-mail</dt><dd><a href="mailto:rahimov@example.tj">rahimov@example.tj</a></dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h2 class="h6 mb-0">Последние отметки</h2></div>
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <thead>
+              <tr>
+                <th scope="col">Дата</th>
+                <th scope="col">Приход</th>
+                <th scope="col">Уход</th>
+                <th scope="col">Часов</th>
+                <th scope="col">Статус</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>22.11.2026</td><td class="time">08:52</td><td class="time">17:05</td><td class="time">8,2</td><td><span class="badge status status-present">Пришёл</span></td></tr>
+              <tr><td>21.11.2026</td><td class="time">09:14</td><td class="time">17:00</td><td class="time">7,8</td><td><span class="badge status status-late">Опоздал</span></td></tr>
+              <tr><td>20.11.2026</td><td class="time">08:55</td><td class="time">17:10</td><td class="time">8,3</td><td><span class="badge status status-present">Пришёл</span></td></tr>
+              <tr><td>19.11.2026</td><td class="time">08:49</td><td class="time">17:02</td><td class="time">8,2</td><td><span class="badge status status-present">Пришёл</span></td></tr>
+              <tr><td>18.11.2026</td><td class="time">—</td><td class="time">—</td><td class="time">0</td><td><span class="badge status status-absent">Отсутствовал</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="app-footer container py-4 text-center">
+  © 2026 Информационная система «Учёт рабочего времени сотрудников»
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

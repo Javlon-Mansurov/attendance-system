@@ -1,0 +1,116 @@
+/* public/assets/css/app.css — стили приложения «Учёт рабочего времени» поверх Bootstrap 5.3 */
+
+/* 1. Токены дизайна (UI-kit) и переопределение переменных Bootstrap */
+:root {
+  --hr-primary: #0F5F66;
+  --hr-primary-dark: #0A474D;
+  --hr-primary-light: #E2F1F2;
+  --hr-bg: #F3F6F7;
+  --hr-border: #D8E0E3;
+  --hr-text: #1B2A30;
+  --hr-muted: #4F6169;
+  --hr-success: #1E7B4F;
+  --hr-warning: #8A5A00;
+  --hr-info: #1F6FA8;
+  --hr-danger: #B42318;
+  --hr-radius: 8px;
+
+  --bs-body-font-family: "Inter", system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+  --bs-body-font-size: 0.9375rem; /* 15px */
+  --bs-body-color: var(--hr-text);
+  --bs-body-bg: var(--hr-bg);
+  --bs-border-color: var(--hr-border);
+  --bs-border-radius: var(--hr-radius);
+  --bs-link-color: var(--hr-primary);
+  --bs-link-color-rgb: 15, 95, 102;
+  --bs-link-hover-color: var(--hr-primary-dark);
+  --bs-primary: var(--hr-primary);
+  --bs-primary-rgb: 15, 95, 102;
+}
+
+/* 2. Типографика */
+h1 { font-size: 1.625rem; font-weight: 600; }
+h2 { font-size: 1.25rem; font-weight: 600; }
+.text-muted-hr { color: var(--hr-muted); }
+
+/* 3. Кнопки и фокус */
+.btn-primary {
+  --bs-btn-bg: var(--hr-primary);
+  --bs-btn-border-color: var(--hr-primary);
+  --bs-btn-hover-bg: var(--hr-primary-dark);
+  --bs-btn-hover-border-color: var(--hr-primary-dark);
+  --bs-btn-active-bg: var(--hr-primary-dark);
+  --bs-btn-active-border-color: var(--hr-primary-dark);
+}
+.btn-outline-primary {
+  --bs-btn-color: var(--hr-primary);
+  --bs-btn-border-color: var(--hr-primary);
+  --bs-btn-hover-bg: var(--hr-primary);
+  --bs-btn-hover-border-color: var(--hr-primary);
+  --bs-btn-active-bg: var(--hr-primary-dark);
+  --bs-btn-active-border-color: var(--hr-primary-dark);
+}
+.btn { min-height: 40px; }
+:focus-visible { outline: 3px solid rgba(15, 95, 102, .45); outline-offset: 2px; }
+
+/* 4. Шапка */
+.app-navbar { background: var(--hr-primary); }
+.app-navbar .nav-link.active { font-weight: 600; }
+.role-badge { background: var(--hr-primary-light); color: var(--hr-primary-dark); }
+
+/* 5. Карточки и таблицы */
+.card { border-color: var(--hr-border); border-radius: var(--hr-radius); }
+.card-header { background: #fff; font-weight: 600; }
+.table { --bs-table-bg: transparent; }
+.table thead th { color: var(--hr-muted); font-weight: 600; font-size: .8125rem; text-transform: uppercase; }
+.stat-card .stat-number { font-size: 2rem; font-weight: 600; color: var(--hr-primary); line-height: 1.1; }
+.stat-card .stat-label { color: var(--hr-muted); }
+.stat-late .stat-number { color: var(--hr-warning); }
+.stat-absent .stat-number { color: var(--hr-danger); }
+.stat-leave .stat-number { color: var(--hr-info); }
+
+/* 6. Бейджи статусов: имя класса = значение ENUM attendance.status */
+.badge.status, .badge-status { font-weight: 600; border-radius: 999px; padding: .35em .75em; }
+.status-present  { background: #E3F4EA; color: var(--hr-success); }
+.status-late     { background: #FFF1D6; color: var(--hr-warning); }
+.status-on_leave { background: #E3F0FA; color: #17588A; }
+.status-absent   { background: #FDE8E6; color: var(--hr-danger); }
+
+/* 7. Аватар */
+.avatar {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--hr-primary-light); color: var(--hr-primary-dark);
+  font-weight: 600; font-size: .8125rem; flex-shrink: 0;
+}
+.avatar-lg { width: 96px; height: 96px; font-size: 1.75rem; }
+
+/* 8. Карточка сотрудника — CSS Grid: «название — значение» */
+.details { display: grid; grid-template-columns: 180px 1fr; gap: .5rem 1rem; margin: 0; }
+.details dt { color: var(--hr-muted); font-weight: 400; }
+.details dd { margin: 0; }
+@media (max-width: 575.98px) {
+  .details { grid-template-columns: 1fr; gap: 0; }
+  .details dd { margin-bottom: .5rem; }
+}
+
+/* 9. Время и часы — моноширинные цифры */
+.time { font-variant-numeric: tabular-nums; }
+
+/* 10. Мобильный список: таблица превращается в карточки */
+@media (max-width: 767.98px) {
+  .table-cards thead { display: none; }
+  .table-cards tr { display: block; padding: .75rem 1rem; border-bottom: 1px solid var(--hr-border); }
+  .table-cards td { display: block; border: 0; padding: .125rem 0 !important; }
+  .table-cards td[data-label]::before { content: attr(data-label) ": "; color: var(--hr-muted); font-size: .8125rem; }
+  .table-cards td.cell-actions { padding-top: .5rem !important; text-align: left !important; }
+}
+
+/* 11. Подвал */
+.app-footer { color: var(--hr-muted); font-size: .8125rem; }
+
+/* 12. Печать */
+@media print {
+  .app-navbar, .app-footer, form[role="search"], .pagination, .btn { display: none !important; }
+  body { background: #fff; }
+}
