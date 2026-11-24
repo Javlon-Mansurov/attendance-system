@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="tg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Баҳисобгирии вақти кории кормандон</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <strong>ДПДТТХ · Вақти корӣ</strong>
+    <span class="tag">Лексияи 11 · JavaScript</span>
+  </header>
+
+  <main>
+    <h1>Баҳисобгирии вақти кории кормандон</h1>
+
+    <!-- 1. Ҷустуҷӯи зинда. Бе JavaScript — GET-и оддӣ (беҳбудии прогрессивӣ). -->
+    <section aria-labelledby="search-title">
+      <h2 id="search-title">Ҷадвали вақти корӣ</h2>
+      <form id="search-form" method="get" action="/records" role="search">
+        <label for="q">Ҷустуҷӯи корманд</label>
+        <input id="q" name="q" type="search" placeholder="Масалан: Раҳ…" autocomplete="off">
+        <button type="submit">Ёфтан</button>
+      </form>
+
+      <p id="status" role="status" aria-live="polite" class="status"></p>
+
+      <table id="records-table" aria-busy="false">
+        <thead>
+          <tr>
+            <th>Ному насаб</th>
+            <th>Санаи корӣ</th>
+            <th>Оғози кор</th>
+            <th>Анҷоми кор</th>
+            <th>Соатҳо</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="records-body"></tbody>
+      </table>
+    </section>
+
+    <!-- 2. Шакли ариза барои рухсатӣ (валидатсияи муштарӣ) -->
+    <section aria-labelledby="leave-title">
+      <h2 id="leave-title">Ариза барои рухсатӣ</h2>
+      <form id="leave-form" method="post" action="/leave" novalidate>
+        <div class="field">
+          <label for="employee">Корманд</label>
+          <input id="employee" name="employee" type="text" required minlength="3">
+          <span class="error" data-error-for="employee"></span>
+        </div>
+        <div class="field">
+          <label for="start_date">Санаи оғоз</label>
+          <input id="start_date" name="start_date" type="date" required>
+          <span class="error" data-error-for="start_date"></span>
+        </div>
+        <div class="field">
+          <label for="end_date">Санаи анҷом</label>
+          <input id="end_date" name="end_date" type="date" required>
+          <span class="error" data-error-for="end_date"></span>
+        </div>
+        <div class="field">
+          <label for="reason">Сабаб</label>
+          <textarea id="reason" name="reason" required minlength="5" rows="3"></textarea>
+          <span class="error" data-error-for="reason"></span>
+        </div>
+        <button type="submit">Фиристодани ариза</button>
+      </form>
+      <p class="note">Валидатсияи муштарӣ — қулайӣ аст, на ҳимоя: сервер ва пойгоҳ (CHECK) аз нав месанҷанд.</p>
+    </section>
+  </main>
+
+  <!-- 3. Тасдиқи модалӣ барои нест кардан -->
+  <dialog id="delete-modal">
+    <form id="delete-form" method="post" action="#">
+      <p>Ин сабтро нест кардан мехоҳед?</p>
+      <div class="actions">
+        <button type="button" id="delete-cancel">Бекор кардан</button>
+        <button type="submit" class="danger">Нест кардан</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

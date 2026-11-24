@@ -1,0 +1,9 @@
+[
+  { "id": 1, "full_name": "Раҳимов Фарҳод Ҷамшедович", "work_date": "2026-11-20", "check_in": "08:00", "check_out": "17:00", "hours": 8.0 },
+  { "id": 2, "full_name": "Раҳмонов Сино Ҷӯраевич", "work_date": "2026-11-20", "check_in": "09:10", "check_out": "18:00", "hours": 7.8 },
+  { "id": 3, "full_name": "Ҳамидова Мунира Раҳматовна", "work_date": "2026-11-20", "check_in": "08:05", "check_out": "16:30", "hours": 7.5 },
+  { "id": 4, "full_name": "Исмоилов Бобоҷон Раҳимович", "work_date": "2026-11-21", "check_in": "08:00", "check_out": "17:15", "hours": 8.3 },
+  { "id": 5, "full_name": "Абдураҳимов Ӯлмас Сафарович", "work_date": "2026-11-21", "check_in": "08:30", "check_out": "17:00", "hours": 7.5 },
+  { "id": 6, "full_name": "Ҷалолов Абдураҳмон Исмоилович", "work_date": "2026-11-21", "check_in": "08:00", "check_out": "12:00", "hours": 4.0 },
+  { "id": 7, "full_name": "Тестов <img src=x onerror=\"alert('XSS')\">", "work_date": "2026-11-22", "check_in": "08:00", "check_out": "17:00", "hours": 8.0 }
+]
